@@ -18,7 +18,7 @@ function void post_randomize();
 
     int DATA_WIDTH;
 
-    if (!uvm_config_db#(int)::get(uvm_root::get(), "dut", "data_width", DATA_WIDTH)) begin
+    if (!uvm_config_db#(int)::get(uvm_root::get(), "top", "data_width", DATA_WIDTH)) begin
         `uvm_fatal(get_type_name(),
              "Failed to get 'data_width' from uvm_config_db. Check testbench configuration.")
     end

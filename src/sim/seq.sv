@@ -1,7 +1,7 @@
 class seq extends uvm_sequence#(seq_item);
     `uvm_object_utils(seq)
 
-    rand int unsigned seq_length;
+    int unsigned seq_length;
 
     function new(string name = "seq");
         super.new(name);
@@ -13,14 +13,14 @@ class seq extends uvm_sequence#(seq_item);
             "test", "seq_length", seq_length));
 
         `uvm_info(get_type_name(), 
-            $sformatf("Creating %0d number of sequences", seq_length), UVM_LOW)
+            $sformatf("Creating %0d number of sequences.", seq_length), UVM_LOW)
 
         for (int unsigned i = 0; i < seq_length; i++) begin
             seq_item item;
             item = seq_item::type_id::create("item");
 
             assert(item.randomize()) else 
-                `uvm_fatal(get_type_name(), "Failed to randomize sequence item")
+                `uvm_fatal(get_type_name(), "Failed to randomize sequence item.")
 
             `uvm_info(get_type_name(), 
                 $sformatf("Sending sequence item %0d: serial_in=%0b, we=%0b", 
@@ -28,9 +28,6 @@ class seq extends uvm_sequence#(seq_item);
 
             start_item(item);
             finish_item(item);
-
-            // Alteratively, you can use:
-            // `uvm_do(item);
         end
     endtask
 
