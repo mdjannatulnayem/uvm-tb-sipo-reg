@@ -1,7 +1,7 @@
 interface ctrl_intf ();
     
     logic clk;
-    logic rst_n;
+    logic arst_n;
 
     realtime timeperiod = 10ns;
     bit clk_en = 0;

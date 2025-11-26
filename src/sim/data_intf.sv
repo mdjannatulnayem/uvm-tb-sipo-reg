@@ -2,7 +2,7 @@ interface data_intf #(
     parameter int DATA_WIDTH=32
 )(
     input logic clk,
-    input logic rst_n
+    input logic arst_n
 );
     
     logic serial_in;
