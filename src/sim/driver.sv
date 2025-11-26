@@ -21,6 +21,13 @@ class driver extends uvm_driver#(seq_item);
         seq_item item;
 
         forever begin
+
+            @(posedge data_if.clk);
+            if (data_if.arst_n == 1'b0) begin
+                `uvm_info(get_type_name(), "In reset, waiting for reset de-assertion", UVM_MEDIUM)
+                @(posedge data_if.arst_n);  // Wait for reset to end
+            end
+
             seq_item_port.get_next_item(item);
 
             `uvm_info(get_type_name(), 
