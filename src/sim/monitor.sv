@@ -40,12 +40,9 @@ class monitor extends uvm_monitor;
 
                 item.serial_in    = data_if.serial_in;
                 item.we           = data_if.we;
-                item.parallel_out = data_if.parallel_out;
 
-                `uvm_info(get_type_name(), 
-                    $sformatf("Monitoring signals: serial_in=%0b, we=%0b, parallel_out=%0h", 
-                        item.serial_in, item.we, item.parallel_out), UVM_LOW)
-
+                `uvm_info(get_type_name(), $sformatf("Monitoring signals: serial_in=%0b, we=%0b",
+                    item.serial_in, item.we), UVM_LOW)
                 ap.write(item);
             end
         join_none

@@ -35,8 +35,7 @@ class driver extends uvm_driver#(seq_item);
                     item.serial_in, item.we, item.parallel_out), UVM_LOW)
 
             data_if.serial_in   <= item.serial_in;
-            data_if.we         <= item.we;
-            data_if.parallel_out <= item.parallel_out;
+            data_if.we          <= item.we;
 
             seq_item_port.item_done();
         end
