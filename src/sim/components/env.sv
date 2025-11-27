@@ -9,7 +9,8 @@ class env extends uvm_environment;
     endfunction
 
     function void build_phase(uvm_phase phase)
-        super.build_phase();
+        super.build_phase(phase);
+        
         agt = agent::type_id::create("agt", this);
         scbd = scb::type_id::create("scbd",this);
 
