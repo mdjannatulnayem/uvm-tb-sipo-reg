@@ -15,7 +15,7 @@ virtual class base_test extends uvm_test;
         envr = env::type_id::create("envr", this);
 
         if (!uvm_config_db#(virtual ctrl_intf)::get(uvm_root::get(),
-             "top", "vcif", ctrl_if)) begin
+             "vcif", "ctrl_if", ctrl_if)) begin
             `uvm_fatal("CTRL_IF", "Control interface not found in the UVM config database.")
         end
         

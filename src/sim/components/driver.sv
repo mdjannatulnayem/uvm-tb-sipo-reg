@@ -11,7 +11,7 @@ class driver extends uvm_driver#(seq_item);
         super.build_phase(phase);
 
         if (!uvm_config_db#(virtual data_intf #(DATA_WIDTH))::get(
-                uvm_root::get(), "test", "data_if", data_if)) begin
+                uvm_root::get(), "vif", "data_if", data_if)) begin
             `uvm_fatal(get_type_name(),
                  "Failed to get virtual interface 'data_if' from uvm_config_db.")
         end

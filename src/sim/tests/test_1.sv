@@ -10,7 +10,7 @@ class test_1 extends base_test;
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
-        uvm_config_db#(int)::set(uvm_root::get(), "test", "seq_length", seq_length);
+        uvm_config_db#(int unsigned)::set(uvm_root::get(), "seq_length", "int", 32);
     endfunction
 
     task run_phase(uvm_phase phase);

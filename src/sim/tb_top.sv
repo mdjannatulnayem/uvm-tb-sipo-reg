@@ -48,16 +48,18 @@ module tb_top;
         $dumpfile("tb_top.vcd");
         $dumpvars(0, tb_top);
 
-        uvm_config_db#(virtual data_intf #(DATA_WIDTH))::set(
-            uvm_root::get(), "top", "vif", data_if);
-        
         uvm_config_db#(int unsigned)::set(
-            uvm_root::get(), "top", "seq_length", SEQ_LENGTH);
-        
-        uvm_config_db#(int unsigned)::set(
-            uvm_root::get(), "top", "shift_left", SHIFT_LEFT);
-        
+            uvm_root::get(), "data_width", "int", DATA_WIDTH);
+            
+        uvm_config_db#(virtual ctrl_intf)::set(
+            uvm_root::get(), "vcif", "ctrl_if", ctrl_if);
 
+        uvm_config_db#(virtual data_intf #(DATA_WIDTH))::set(
+            uvm_root::get(), "vif", "data_if", data_if);
+        
+        uvm_config_db#(int unsigned)::set(
+            uvm_root::get(), "shift_left", "int", SHIFT_LEFT);
+        
         run_test(test);
 
         #100 $finish;

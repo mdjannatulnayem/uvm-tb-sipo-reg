@@ -15,7 +15,7 @@ class monitor extends uvm_monitor;
         super.build_phase(phase);
 
         if (!uvm_config_db#(virtual data_intf #(DATA_WIDTH))::get(
-                uvm_root::get(), "test", "data_if", data_if)) begin
+                uvm_root::get(), "vif", "data_if", data_if)) begin
             `uvm_fatal(get_type_name(),
                  "Failed to get virtual interface 'data_if' from uvm_config_db.")
         end
@@ -25,7 +25,7 @@ class monitor extends uvm_monitor;
     task run_phase(uvm_phase phase);
 
         (uvm_config_db #(int unsigned)::get(uvm_root::get(), 
-            "test", "seq_length", seq_length));
+            "seq_length", "int", seq_length));
         
         fork
             forever begin

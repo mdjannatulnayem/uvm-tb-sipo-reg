@@ -10,7 +10,7 @@ class seq extends uvm_sequence#(seq_item);
     task body();
         
         void'(uvm_config_db #(int unsigned)::get(uvm_root::get(), 
-            "test", "seq_length", seq_length));
+            "seq_length", "int", seq_length));
 
         `uvm_info(get_type_name(), 
             $sformatf("Creating %0d number of sequences.", seq_length), UVM_LOW)

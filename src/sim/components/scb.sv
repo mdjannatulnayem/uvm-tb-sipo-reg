@@ -18,12 +18,12 @@ class scb extends uvm_component;
         super.new(name, parent);
         ap = new("ap", this);
 
-        if (!uvm_config_db#(int)::get(uvm_root::get(), "top", "data_width", DATA_WIDTH)) begin
+        if (!uvm_config_db#(int)::get(uvm_root::get(), "data_width", "int", DATA_WIDTH)) begin
             `uvm_fatal(get_type_name(),
                 "Failed to get 'data_width' from uvm_config_db. Check testbench configuration.")
         end
 
-        if (!uvm_config_db#(bit)::get(uvm_root::get(), "top", "shift_left", SHIFT_LEFT)) begin
+        if (!uvm_config_db#(bit)::get(uvm_root::get(), "shift_left", "int", SHIFT_LEFT)) begin
             `uvm_fatal(get_type_name(),
                 "Failed to get 'shift_left' from uvm_config_db. Check testbench configuration.")
         end
