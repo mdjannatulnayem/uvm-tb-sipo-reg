@@ -16,13 +16,7 @@ interface ctrl_intf ();
         arst_n <= 1'b1;
     endtask
 
-    initial begin
-        forever begin
-            clk <= clk_en & arst_n;
-            #(timeperiod / 2);
-            clk <= 1'b0;
-            #(timeperiod / 2);
-        end
-    end
+always #(timeperiod/2) clk = clk_en ? ~clk : 0;
+
 
 endinterface : ctrl_intf
