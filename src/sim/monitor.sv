@@ -3,7 +3,7 @@ class monitor extends uvm_monitor;
 
     virtual data_intf #(DATA_WIDTH) data_if;
 
-    uvm_analysis_port#(seq_item) ap;
+    uvm_analysis_port#(rsp_item) ap;
     int unsigned seq_length;
 
     function new(string name, uvm_component parent);
@@ -29,8 +29,8 @@ class monitor extends uvm_monitor;
         
         fork
             forever begin
-                seq_item item;
-                item = seq_item::type_id::create("item");
+                rsp_item item;
+                item = rsp_item::type_id::create("item");
 
                 @(posedge data_if.clk);
                 if (data_if.arst_n == 1'b0) begin
@@ -40,9 +40,11 @@ class monitor extends uvm_monitor;
 
                 item.serial_in    = data_if.serial_in;
                 item.we           = data_if.we;
+                item.parallel_out  = data_if.parallel_out;
 
-                `uvm_info(get_type_name(), $sformatf("Monitoring signals: serial_in=%0b, we=%0b",
-                    item.serial_in, item.we), UVM_LOW)
+                `uvm_info(get_type_name(), $sformatf("Monitoring signals: serial_in=%0b, we=%0b, parallel_out=%0h",
+                    item.serial_in, item.we, item.parallel_out), UVM_LOW)
+                    
                 ap.write(item);
             end
         join_none
