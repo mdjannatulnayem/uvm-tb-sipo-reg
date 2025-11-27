@@ -19,8 +19,11 @@ module sipo_reg #(
             end else begin
                 shift_reg <= {serial_in, shift_reg[DATA_WIDTH-1:1]};
             end
+        //     parallel_out <= '0;
+        // end else begin
+        //     parallel_out <= shift_reg;
         end
     end
 
-    assign parallel_out = shift_reg;
+    assign parallel_out = we? '0 : shift_reg;
 endmodule
