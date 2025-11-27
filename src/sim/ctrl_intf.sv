@@ -18,7 +18,7 @@ interface ctrl_intf ();
 
     initial begin
         forever begin
-            clk <= clk_en & rst_n;
+            clk <= clk_en & arst_n;
             #(timeperiod / 2);
             clk <= 1'b0;
             #(timeperiod / 2);
