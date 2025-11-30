@@ -11,6 +11,12 @@ WORKDIR  = $(BUILDDIR)/work
 SRC_FILELIST = filelist.f         # original filelist.f in root
 BUILD_FILELIST = $(BUILDDIR)/filelist.f  # generated filelist for build/
 
+# Default test name
+DEFAULT_TEST = test_1
+
+# Test name from argument or use default
+TEST_NAME ?= $(DEFAULT_TEST)
+
 # Makefile Targets
 .PHONY: all clean build compile elab sim
 
@@ -38,8 +44,8 @@ elab:
 
 # Run simulation inside build/
 sim:
-	@echo "Running simulation..."
-	cd $(BUILDDIR) && $(XSIM) work.tb_top -runall
+	@echo "Running simulation with test: $(TEST_NAME)..."
+	cd $(BUILDDIR) && $(XSIM) work.tb_top -runall --testplusarg "TEST=$(TEST_NAME)"
 
 # Clean build directory
 clean:
