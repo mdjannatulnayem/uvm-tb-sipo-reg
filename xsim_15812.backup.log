@@ -1,0 +1,54 @@
+#-----------------------------------------------------------
+# xsim v2025.1 (64-bit)
+# SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Sun Nov 30 23:00:09 2025
+# Process ID         : 15812
+# Current directory  : /media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg
+# Command line       : xsim -mode tcl -source {xsim.dir/work.tb_top/xsim_script.tcl}
+# Log file           : /media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/xsim.log
+# Journal file       : /media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/xsim.jou
+# Running On         : sniffer-jr
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 24.04.3 LTS
+# Processor Detail   : Intel(R) Celeron(R) N4000 CPU @ 1.10GHz
+# CPU Frequency      : 2487.247 MHz
+# CPU Physical cores : 2
+# CPU Logical cores  : 2
+# Host memory        : 8142 MB
+# Swap memory        : 4294 MB
+# Total Virtual      : 12437 MB
+# Available Virtual  : 8939 MB
+#-----------------------------------------------------------
+source xsim.dir/work.tb_top/xsim_script.tcl
+# xsim {work.tb_top} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+UVM_INFO /opt/Xilinx/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+##--------------TEST STARTED-------------_##
+Fatal: No test name provided. Use +TEST=<test_name> to specify a test.
+Time: 0 ps  Iteration: 0  Process: /tb_top/Initial40_306  Scope: tb_top.Block40_307  File: /media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/tb_top.sv Line: 45
+$finish called at time : 0 fs
+exit
+##--------------TEST ENDED--------------##
+INFO: [Common 17-206] Exiting xsim at Sun Nov 30 23:00:20 2025...

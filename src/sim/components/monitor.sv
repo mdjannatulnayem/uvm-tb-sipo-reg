@@ -25,8 +25,7 @@ class monitor extends uvm_monitor;
 
     task run_phase(uvm_phase phase);
 
-        uvm_config_db #(int unsigned)::get(uvm_root::get(), 
-            "seq_length", "int", seq_length);
+        void'(uvm_config_db #(int unsigned)::get(uvm_root::get(), "seq_length", "int", seq_length));
         
         fork
             forever begin

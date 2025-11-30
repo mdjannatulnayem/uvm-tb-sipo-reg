@@ -17,7 +17,7 @@ module tb_top;
     logic we;
     logic [DATA_WIDTH-1:0] parallel_out;   
 
-    ctrl_if ctrl_if();
+    ctrl_intf ctrl_if();
     data_intf #(DATA_WIDTH) data_if(.clk(clk), .arst_n(arst_n));
 
     sipo_reg #(
@@ -35,7 +35,7 @@ module tb_top;
     assign arst_n = ctrl_if.arst_n;
     assign serial_in = data_if.serial_in;
     assign we = data_if.we;
-    assign parallel_out = data_if.parallel_out;
+    assign data_if.parallel_out = parallel_out;
 
     initial begin
 
