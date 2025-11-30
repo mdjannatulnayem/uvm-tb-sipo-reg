@@ -1,42 +1,48 @@
-# Compiler, Elaborator, Simulator
+# Vivado Tools
 XVLOG = xvlog
 XELAB = xelab
-XSIM = xsim
+XSIM  = xsim
 
-# Directory for build files
+# Build directory
 BUILDDIR = build
+LIB      = work
 
-# File list
+# Source file list
 FILELIST = filelist.f
 
-# Target for clean up and rebuilding
+# Makefile Targets
 .PHONY: all clean compile elab sim build
 
-# Target to run the full build process: clean, compile, elaborate, and simulate
+# Default target
 all: clean build compile elab sim
 	@echo "Build process completed."
 
-# Compilation step using filelist.f 
-compile: build
-	@echo "Compiling source files."
-	$(XVLOG) -sv -work $(BUILDDIR) -f $(FILELIST)
-
-# Elaboration step (debug flag supported here)
-elab: compile
-	@echo "Elaborating design."
-	$(XELAB) -work $(BUILDDIR) tb_top -top tb_top --debug all
-
-# Simulation step (non-GUI mode)
-sim: elab
-	@echo "Running simulation in non-GUI mode."
-	$(XSIM) tb_top -runall
-
-# Create build directory if it doesn't exist
 build:
 	@echo "Creating build directory."
 	mkdir -p $(BUILDDIR)
 
-# Clean up build directory
+compile:
+	@echo "Compiling source files."
+	$(XVLOG) -sv \
+		-work $(BUILDDIR)/$(LIB) \
+		-f $(FILELIST) \
+		-L uvm \
+		-d UVM_NO_DEPRECATED \
+		-d UVM_OBJECT_MUST_HAVE_CONSTRUCTOR
+
+elab:
+	@echo "Elaborating design."
+	$(XELAB) \
+		-work $(BUILDDIR)/$(LIB) \
+		tb_top -top tb_top \
+		-L uvm \
+		--debug typical
+
+sim:
+	@echo "Running simulation."
+	$(XSIM) tb_top -runall
+
+# Clean target
 clean:
 	@echo "Cleaning up build directory."
 	rm -rf $(BUILDDIR)
