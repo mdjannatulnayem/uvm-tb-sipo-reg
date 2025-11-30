@@ -2,191 +2,130 @@
 
 ## Overview
 
-This repository contains a **Universal Verification Methodology (UVM)** testbench for verifying a **Serial-In Parallel-Out (SIPO) Register** implemented in SystemVerilog.
-
-The environment is built to run seamlessly on **Xilinx Vivado 2025.x** using:
-
-* `xvlog` — compiler
-* `xelab` — elaborator
-* `xsim` — simulator
-
-The project includes a modular UVM environment with reusable components, sequences, tests, and a clean build flow using a Makefile.
-
----
+This repository contains a UVM-based (Universal Verification Methodology) testbench for verifying a **Serial-In-Parallel-Out (SIPO) Register** design. The testbench is structured to facilitate easy integration of UVM components and provide an efficient simulation flow using **Xilinx Vivado** tools (with `xvlog`, `xelab`, and `xsim`).
 
 ## Features
 
-* **Complete UVM Verification Environment**
+* **UVM Testbench**: Modular testbench structure with components like agents, drivers, monitors, and sequencers.
+* **SIPO Register Design**: RTL description of a Serial-In-Parallel-Out Register.
+* **Verification**: Various test cases and stimulus generation through UVM sequences.
+* **Simulation**: Easy integration with Xilinx tools for compiling, elaborating, and simulating the design.
+* **Debugging Support**: Debugging flags (`--debug all`) enabled during elaboration for easier troubleshooting.
 
-  * Driver, Monitor, Agent, Sequencer, Scoreboard, Environment
-* **SIPO Register RTL**
-
-  * Simple and synthesizable RTL implementation
-* **Parameterized UVM Sequences & Tests**
-* **Vivado-Compatible Simulation Flow**
-
-  * Uses `xvlog → xelab → xsim`
-  * UVM library linking with `-L uvm`
-* **Makefile Automation**
-
-  * Clean, compile, elaborate, simulate
-* **Debug & Waveform Ready**
-
-  * Can extend to GUI runs with `xsim --gui`
-
----
-
-## 📂 Directory Structure
+## Directory Structure
 
 ```
 .
-├── docs/                 # Documentation and specs
-│   └── rtl_spec.md
-├── filelist.f            # All RTL + TB files for compilation
-├── LICENSE               # Project license
-├── Makefile              # Build + simulation automation
-├── README.md             # Project overview (this file)
-└── src/
-    ├── rtl/              # RTL design
-    │   └── sipo_reg.sv
-    └── sim/              # UVM testbench
-        ├── components/   # Driver, monitor, agent, env, scoreboard, sequencer
-        ├── interfaces/   # ctrl_intf.sv / data_intf.sv
-        ├── objects/      # seq_item, rsp_item, sequences
-        ├── tests/        # base_test, test_1
-        └── tb_top.sv     # Top-level SystemVerilog testbench
+├── docs                # Documentation files
+├── filelist.f          # List of all source files for compilation
+├── LICENSE             # License information
+├── Makefile            # Build and simulation automation
+├── README.md           # Project overview
+└── src
+    ├── rtl             # RTL design files
+    │   └── sipo_reg.sv # SIPO register design (SystemVerilog)
+    └── sim             # UVM testbench files
+        ├── components  # UVM components like agent, driver, monitor, etc.
+        ├── interfaces  # UVM interfaces (control/data)
+        ├── objects     # UVM sequences, items, response items
+        ├── tests       # UVM test cases
+        └── tb_top.sv   # Top-level testbench file
 ```
-
----
 
 ## Requirements
 
-To build and run simulations:
+To build and simulate the design, you need the following tools:
 
-* **Xilinx Vivado 2020.2+** (tested on Vivado 2025)
-* **GNU Make**
-* A Unix-like shell (Linux/macOS/WSL recommended)
+* **Xilinx Vivado**: For simulation (`xvlog`, `xelab`, and `xsim`)
+* **Make**: For automation of the build process
 
----
+## Getting Started
 
-## 🚀 Getting Started
+### Clone the Repository
 
-### 1️⃣ Clone the Repository
+First, clone this repository to your local machine:
 
 ```bash
 git clone https://github.com/yourusername/uvm-tb-sipo-reg.git
 cd uvm-tb-sipo-reg
 ```
 
----
+### Build and Run the Simulation
 
-## ▶️ Running Simulation
+Use the provided `Makefile` to automate the process of compilation, elaboration, and simulation.
 
-This project provides a Makefile for a clean Vivado workflow.
+1. **Clean the build directory** (optional but recommended):
 
-### **Recommended: Full Build Flow**
+   ```bash
+   make clean
+   ```
 
-```bash
-make all
-```
+2. **Run the full build process** (compilation, elaboration, and simulation):
 
-This performs:
+   ```bash
+   make all
+   ```
 
-1. `clean` – remove stale caches (`build/`, `xsim.dir/`, logs)
-2. `compile` – run `xvlog` using `filelist.f`
-3. `elab` – elaborate the testbench in Vivado UVM mode
-4. `sim` – run `xsim` in non-GUI mode
+This will:
 
----
+* Create a `build/` directory for intermediate files.
+* Compile the source files.
+* Elaborate the design.
+* Run the simulation in non-GUI mode (`--runall`).
 
-### 🧩 Individual Steps
+### Individual Targets
 
-**Compile RTL + TB:**
+You can also run individual steps using the following commands:
 
-```bash
-make compile
-```
+* **Compile**: Compile the design files listed in `filelist.f`.
 
-**Elaborate:**
+  ```bash
+  make compile
+  ```
 
-```bash
-make elab
-```
+* **Elaborate**: Elaborate the design after compilation.
 
-**Simulate (console):**
+  ```bash
+  make elab
+  ```
 
-```bash
-make sim
-```
+* **Simulate**: Run the simulation in non-GUI mode.
 
----
+  ```bash
+  make sim
+  ```
 
-## UVM Testbench Structure
+### Simulation Output
 
-The verification environment follows a standard UVM hierarchy:
+The simulation output will be printed in the terminal. If you encounter any issues, check the logs and debug information generated during compilation.
 
-### Components
+## UVM Testbench Components
 
-| Component       | Description                                   |
-| --------------- | --------------------------------------------- |
-| **Driver**      | Converts sequence items to pin-level activity |
-| **Monitor**     | Observes DUT outputs and gathers transactions |
-| **Sequencer**   | Controls stimulus ordering                    |
-| **Agent**       | Bundles driver, monitor, sequencer            |
-| **Scoreboard**  | Checks correctness of DUT output              |
-| **Environment** | Instantiates and connects all components      |
+This testbench follows the UVM methodology, and the files in the `src/sim` directory are organized into the following categories:
 
-### Objects
+* **Components**: The main UVM components such as `agent.sv`, `driver.sv`, `monitor.sv`, etc.
+* **Interfaces**: UVM interfaces like `ctrl_intf.sv` and `data_intf.sv` for communication between components.
+* **Objects**: UVM objects such as `seq_item.sv`, `rsp_item.sv`, and `seq.sv` for handling transaction-level communication.
+* **Tests**: UVM test cases like `base_test.sv` and `test_1.sv` for running different simulations.
+* **Top-level Testbench**: `tb_top.sv` is the top-level testbench file that connects all the components and interfaces.
 
-* `seq_item.sv` – transaction class
-* `rsp_item.sv` – response object
-* `seq.sv` – UVM sequence
+## License
 
-### Tests
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-* `base_test.sv` – UVM test configuration
-* `test_1.sv` – Example test sequence
+## Documentation
 
----
+Further documentation can be found in the `docs/` directory. This includes detailed descriptions of the design specification and more.
 
-## 📝 Documentation
+## Contributing
 
-Detailed documentation is available under:
+Feel free to fork this project and submit pull requests for improvements. Please ensure that tests pass and that new features are well-documented.
 
-```
-docs/rtl_spec.md
-```
+## Contact
 
-This includes RTL behavior and verification approach.
+For any questions or feedback, please contact the repository maintainer:
 
----
+* Name: Md. Jannatul Nayem
+* Email: nayemalimran106@gmail.com
+* GitHub: mdjannatulnayem
 
-## 🛠️ Contributing
-
-Contributions are welcome!
-Feel free to:
-
-* open issues
-* submit pull requests
-* propose new test cases or features
-
-Make sure that:
-
-* code is well formatted
-* tests pass
-* documentation is updated accordingly
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
-See the `LICENSE` file for details.
-
----
-
-## 📬 Contact
-
-**Md. Jannatul Nayem**
-📧 Email: *[nayemalimran106@gmail.com](mailto:nayemalimran106@gmail.com)*
-🐙 GitHub: [mdjannatulnayem](https://github.com/mdjannatulnayem)
