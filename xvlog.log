@@ -1,9 +1,0 @@
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/rtl/sipo_reg.sv" into library build
-INFO: [VRFC 10-311] analyzing module sipo_reg
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/interfaces/ctrl_intf.sv" into library build
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/interfaces/data_intf.sv" into library build
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/objects/seq_item.sv" into library build
-ERROR: [VRFC 10-3805] use of undefined macro 'uvm_object_utils_begin' [/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/objects/seq_item.sv:3]
-ERROR: [VRFC 10-4982] syntax error near '(' [/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/objects/seq_item.sv:3]
-ERROR: [VRFC 10-3805] use of undefined macro 'uvm_field_bit' [/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/objects/seq_item.sv:4]
-ERROR: [VRFC 10-3805] use of undefined macro 'UVM_OBJECT_UTILS_END' [/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/objects/seq_item.sv:6]
