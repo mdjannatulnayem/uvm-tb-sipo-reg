@@ -5,13 +5,14 @@ class driver extends uvm_driver#(seq_item);
         super.new(name, parent);
     endfunction
 
+    localparam DATA_WIDTH = 32;
     virtual data_intf #(DATA_WIDTH) data_if;
 
     function build_phase(uvm_phase phase);
         super.build_phase(phase);
 
         if (!uvm_config_db#(virtual data_intf #(DATA_WIDTH))::get(
-                uvm_root::get(), "vif", "data_if", data_if)) begin
+                uvm_root::get(), "vdif", "data_if", data_if)) begin
             `uvm_fatal(get_type_name(),
                  "Failed to get virtual interface 'data_if' from uvm_config_db.")
         end
@@ -30,8 +31,7 @@ class driver extends uvm_driver#(seq_item);
 
             seq_item_port.get_next_item(item);
 
-            `uvm_info(get_type_name(), 
-                $sformatf("Driving signals: serial_in=%0b, we=%0b, parallel_out=%0h", 
+            `uvm_info(get_type_name(), $sformatf("Driving signals: serial_in=%0b, we=%0b, parallel_out=%0h", 
                     item.serial_in, item.we, item.parallel_out), UVM_LOW)
 
             data_if.serial_in   <= item.serial_in;

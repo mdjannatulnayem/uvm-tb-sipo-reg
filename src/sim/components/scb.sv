@@ -4,8 +4,8 @@ class scb extends uvm_component;
     // Analysis port to receive monitored transactions
     uvm_analysis_export #(rsp_item) ap;
 
-    unsigned int DATA_WIDTH = 32;
-    parameter bit SHIFT_LEFT = 1; // 1 for left shift, 0 for right shift
+    localparam DATA_WIDTH = 32;
+    localparam SHIFT_LEFT = 1; // 1 for left shift, 0 for right shift
 
     // Golden model storage
     bit [DATA_WIDTH-1:0] golden_shift_reg;
@@ -18,15 +18,15 @@ class scb extends uvm_component;
         super.new(name, parent);
         ap = new("ap", this);
 
-        if (!uvm_config_db#(int)::get(uvm_root::get(), "data_width", "int", DATA_WIDTH)) begin
-            `uvm_fatal(get_type_name(),
-                "Failed to get 'data_width' from uvm_config_db. Check testbench configuration.")
-        end
+        // if (!uvm_config_db#(int)::get(uvm_root::get(), "data_width", "int", DATA_WIDTH)) begin
+        //     `uvm_fatal(get_type_name(),
+        //         "Failed to get 'data_width' from uvm_config_db. Check testbench configuration.")
+        // end
 
-        if (!uvm_config_db#(bit)::get(uvm_root::get(), "shift_left", "int", SHIFT_LEFT)) begin
-            `uvm_fatal(get_type_name(),
-                "Failed to get 'shift_left' from uvm_config_db. Check testbench configuration.")
-        end
+        // if (!uvm_config_db#(bit)::get(uvm_root::get(), "shift_left", "int", SHIFT_LEFT)) begin
+        //     `uvm_fatal(get_type_name(),
+        //         "Failed to get 'shift_left' from uvm_config_db. Check testbench configuration.")
+        // end
 
         golden_shift_reg = '0;
         pass_count = 0;

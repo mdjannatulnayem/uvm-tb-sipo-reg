@@ -10,6 +10,11 @@ src/sim/interfaces/ctrl_intf.sv
 src/sim/interfaces/data_intf.sv
 
 #------------------------------
+# Top
+#------------------------------
+src/sim/tb_top.sv
+
+#------------------------------
 # Objects
 #------------------------------
 src/sim/objects/seq_item.sv
@@ -31,8 +36,3 @@ src/sim/components/env.sv
 #------------------------------
 src/sim/tests/base_test.sv
 src/sim/tests/test_1.sv
-
-#------------------------------
-# Top
-#------------------------------
-src/sim/tb_top.sv

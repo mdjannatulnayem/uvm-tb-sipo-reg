@@ -1,6 +1,7 @@
 class monitor extends uvm_monitor;
     `uvm_component_utils(monitor)
 
+    localparam DATA_WIDTH = 32;
     virtual data_intf #(DATA_WIDTH) data_if;
 
     uvm_analysis_port#(rsp_item) ap;
@@ -11,11 +12,11 @@ class monitor extends uvm_monitor;
         ap = new("ap", this);
     endfunction : new
 
-    function build_phase(uvm_phase phase);
+    function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
         if (!uvm_config_db#(virtual data_intf #(DATA_WIDTH))::get(
-                uvm_root::get(), "vif", "data_if", data_if)) begin
+                uvm_root::get(), "vdif", "data_if", data_if)) begin
             `uvm_fatal(get_type_name(),
                  "Failed to get virtual interface 'data_if' from uvm_config_db.")
         end
@@ -24,8 +25,8 @@ class monitor extends uvm_monitor;
 
     task run_phase(uvm_phase phase);
 
-        (uvm_config_db #(int unsigned)::get(uvm_root::get(), 
-            "seq_length", "int", seq_length));
+        uvm_config_db #(int unsigned)::get(uvm_root::get(), 
+            "seq_length", "int", seq_length);
         
         fork
             forever begin

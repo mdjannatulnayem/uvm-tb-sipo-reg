@@ -1,0 +1,17 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/rtl/sipo_reg.sv" into library work
+INFO: [VRFC 10-311] analyzing module sipo_reg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/interfaces/ctrl_intf.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/interfaces/data_intf.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/tb_top.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/objects/seq_item.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/objects/rsp_item.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/objects/seq.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/components/seqr.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/components/driver.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/components/monitor.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/components/agent.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/components/scb.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/components/env.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/tests/base_test.sv" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nayem/7B17-8FA2/__DV_work/uvm-tb-sipo-reg/src/sim/tests/test_1.sv" into library work
