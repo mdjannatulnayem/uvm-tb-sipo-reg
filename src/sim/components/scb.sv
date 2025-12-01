@@ -2,7 +2,7 @@ class scb extends uvm_component;
     `uvm_component_utils(scb)
 
     // Analysis port to receive monitored transactions
-    uvm_analysis_export #(rsp_item) ap;
+    uvm_analysis_imp #(rsp_item, scb) ap;
 
     localparam DATA_WIDTH = 32;
     localparam SHIFT_LEFT = 1; // 1 for left shift, 0 for right shift
