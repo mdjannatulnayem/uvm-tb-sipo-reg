@@ -14,17 +14,15 @@ class test_1 extends base_test;
     endfunction
 
     task run_phase(uvm_phase phase);
+        seq test_1_seq;
         super.run_phase(phase);
 
         phase.raise_objection(this);
         `uvm_info(get_type_name(), $sformatf("Starting test with sequence_length = %0d",seq_length), UVM_LOW)
 
-        seq test_1_seq;
         test_1_seq = seq::type_id::create("test_1_seq");
 
-        fork
-            test_1_seq.start(envr.agt.sqr);
-        join
+        test_1_seq.start(envr.agt.sqr);
 
         phase.drop_objection(this);
     endtask
