@@ -73,7 +73,7 @@ module sipo_reg #(
     end
 
 
-    function logic [DATA_WIDTH-1:0] reverse_bits(input logic [DATA_WIDTH-1:0] in);
+    function automatic logic [DATA_WIDTH-1:0] reverse_bits(input logic [DATA_WIDTH-1:0] in);
         logic [DATA_WIDTH-1:0] reversed;
         integer i;
         begin

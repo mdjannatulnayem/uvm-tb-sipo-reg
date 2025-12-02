@@ -49,20 +49,21 @@ class scb extends uvm_component;
 
         // Compare DUT output with golden model
         if(t.parallel_out !== output_expected) begin
-            `uvm_error(get_type_name(),
-                $sformatf("Mismatch detected! DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, we=%0b",
-                          t.parallel_out, output_expected, t.serial_in, t.we))
+            `uvm_error(get_type_name(), 
+                $sformatf("Mismatch detected! DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, we=%0b, out_dir=%0b, shift_dir=%0b",
+                        t.parallel_out, output_expected, t.serial_in, t.we, t.out_dir, t.shift_dir))
             fail_count++;
         end else begin
-            `uvm_info(get_type_name(),
-                $sformatf("Match: DUT=0x%0h, GOLD=0x%0h", t.parallel_out, output_expected), UVM_LOW)
+            `uvm_info(get_type_name(), 
+                $sformatf("Match: DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, we=%0b, out_dir=%0b, shift_dir=%0b", 
+                    t.parallel_out, output_expected, t.serial_in, t.we, t.out_dir, t.shift_dir), UVM_LOW)
             pass_count++;
         end
 
     endfunction
 
     // Utility function to reverse the golden model bits
-    function logic [DATA_WIDTH-1:0] reverse_bits(input logic [DATA_WIDTH-1:0] in);
+    function automatic logic [DATA_WIDTH-1:0] reverse_bits(input logic [DATA_WIDTH-1:0] in);
         logic [DATA_WIDTH-1:0] reversed;
         integer i;
         begin

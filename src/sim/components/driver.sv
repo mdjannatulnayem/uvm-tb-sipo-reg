@@ -31,8 +31,8 @@ class driver extends uvm_driver#(seq_item);
 
             seq_item_port.get_next_item(item);
 
-            `uvm_info(get_type_name(), $sformatf("Driving signals: serial_in=%0b, we=%0b", 
-                    item.serial_in, item.we), UVM_LOW)
+            `uvm_info(get_type_name(), $sformatf("Driving signals: serial_in=%0b, we=%0b, out_dir=%0b, shift_dir=%0b", 
+                    item.serial_in, item.we,item.out_dir,item.shift_dir), UVM_LOW)
 
             data_if.serial_in   <= item.serial_in;
             data_if.we          <= item.we;
