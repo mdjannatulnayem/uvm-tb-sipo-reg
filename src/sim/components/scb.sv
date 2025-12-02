@@ -64,9 +64,10 @@ class scb extends uvm_component;
 
     // Report summary at the end of simulation
     function void report_phase(uvm_phase phase);
+        super.report_phase(phase);
         `uvm_info(get_type_name(),
             $sformatf("===== SCOREBOARD SUMMARY =====\nPass Count = %0d\nFail Count = %0d\n==============================", 
-                pass_count, fail_count),UVM_HIGH)
+                pass_count, fail_count),UVM_MEDIUM)
     endfunction
 
 endclass : scb
