@@ -40,6 +40,8 @@ class monitor extends uvm_monitor;
 
                 item.serial_in    = data_if.serial_in;
                 item.we           = data_if.we;
+                item.out_dir      = data_if.out_dir;
+                item.shift_dir    = data_if.shift_dir;
                 item.parallel_out  = data_if.parallel_out;
 
                 `uvm_info(get_type_name(), $sformatf("Monitoring signals: serial_in=%0b, we=%0b, parallel_out=%0h",

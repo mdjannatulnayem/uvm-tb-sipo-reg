@@ -36,6 +36,8 @@ class driver extends uvm_driver#(seq_item);
 
             data_if.serial_in   <= item.serial_in;
             data_if.we          <= item.we;
+            data_if.out_dir     <= item.out_dir;
+            data_if.shift_dir   <= item.shift_dir;
 
             seq_item_port.item_done();
         end
