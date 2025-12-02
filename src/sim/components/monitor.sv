@@ -5,7 +5,7 @@ class monitor extends uvm_monitor;
     virtual data_intf #(DATA_WIDTH) data_if;
 
     uvm_analysis_port#(rsp_item) ap;
-    int unsigned seq_length;
+    int unsigned seq_length = 32;
 
     function new(string name, uvm_component parent);
         super.new(name, parent);

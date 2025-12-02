@@ -1,7 +1,7 @@
 class seq extends uvm_sequence#(seq_item);
     `uvm_object_utils(seq)
 
-    int unsigned seq_length;
+    int unsigned seq_length = 32;
 
     function new(string name = "seq");
         super.new(name);
