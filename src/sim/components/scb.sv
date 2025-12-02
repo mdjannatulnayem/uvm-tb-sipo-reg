@@ -9,6 +9,7 @@ class scb extends uvm_component;
 
     // Golden model storage
     bit [DATA_WIDTH-1:0] golden_shift_reg;
+    bit [DATA_WIDTH-1:0] output_expected;
 
     // Counters
     int pass_count;
@@ -18,17 +19,8 @@ class scb extends uvm_component;
         super.new(name, parent);
         ap = new("ap", this);
 
-        // if (!uvm_config_db#(int)::get(uvm_root::get(), "data_width", "int", DATA_WIDTH)) begin
-        //     `uvm_fatal(get_type_name(),
-        //         "Failed to get 'data_width' from uvm_config_db. Check testbench configuration.")
-        // end
-
-        // if (!uvm_config_db#(bit)::get(uvm_root::get(), "shift_left", "int", SHIFT_LEFT)) begin
-        //     `uvm_fatal(get_type_name(),
-        //         "Failed to get 'shift_left' from uvm_config_db. Check testbench configuration.")
-        // end
-
         golden_shift_reg = '0;
+        output_expected = '0;
         pass_count = 0;
         fail_count = 0;
     endfunction
@@ -43,22 +35,28 @@ class scb extends uvm_component;
 
         // Shift the golden model according to DUT behavior
         if(t.we) begin
+             // When we is high, output_expected is zero
             if(SHIFT_LEFT) begin
                 golden_shift_reg = {golden_shift_reg[DATA_WIDTH-2:0], t.serial_in};
+                output_expected = '0;
             end else begin
                 golden_shift_reg = {t.serial_in, golden_shift_reg[DATA_WIDTH-1:1]};
+                output_expected = '0;
             end
+        end else begin
+            // When we is low, output_expected should match shift register
+            output_expected = golden_shift_reg; 
         end
 
         // Compare DUT output with golden model
-        if(t.parallel_out !== golden_shift_reg) begin
+        if(t.parallel_out !== output_expected) begin
             `uvm_error(get_type_name(),
                 $sformatf("Mismatch detected! DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, we=%0b",
-                          t.parallel_out, golden_shift_reg, t.serial_in, t.we))
+                          t.parallel_out, output_expected, t.serial_in, t.we))
             fail_count++;
         end else begin
             `uvm_info(get_type_name(),
-                $sformatf("Match: DUT=0x%0h, GOLD=0x%0h", t.parallel_out, golden_shift_reg), UVM_LOW)
+                $sformatf("Match: DUT=0x%0h, GOLD=0x%0h", t.parallel_out, output_expected), UVM_LOW)
             pass_count++;
         end
 
@@ -68,8 +66,7 @@ class scb extends uvm_component;
     function void report_phase(uvm_phase phase);
         `uvm_info(get_type_name(),
             $sformatf("===== SCOREBOARD SUMMARY =====\nPass Count = %0d\nFail Count = %0d\n==============================", 
-                      pass_count, fail_count),
-            UVM_HIGH)
+                pass_count, fail_count),UVM_HIGH)
     endfunction
 
 endclass : scb
