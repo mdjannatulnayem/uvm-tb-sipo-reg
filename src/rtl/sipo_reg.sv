@@ -55,22 +55,8 @@ module sipo_reg #(
             end
         end
     end
-
-    // Output normal or reverse order
-    always_ff @(posedge clk or negedge arst_n) begin
-        if (~arst_n) begin
-            parallel_out <= '0;
-        end else if (~load) begin
-            if (out_dir) begin // MSB to LSB (reverse order)
-                // Reverse the bits in shift_reg
-                parallel_out <= reverse_bits(shift_reg);
-            end else begin // LSB to MSB (normal order)
-                parallel_out <= shift_reg;
-            end
-        end else begin
-            parallel_out <= '0;
-        end
-    end
+    
+    assign parallel_out = load ? '0 : out_dir ? reverse_bits(shift_reg) : shift_reg;
 
 
     function automatic logic [DATA_WIDTH-1:0] reverse_bits(input logic [DATA_WIDTH-1:0] in);
