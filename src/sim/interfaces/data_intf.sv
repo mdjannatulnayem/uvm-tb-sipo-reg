@@ -6,7 +6,7 @@ interface data_intf #(
 );
     
     logic serial_in;
-    logic we;
+    logic load;
     logic out_dir;
     logic shift_dir;
     logic [DATA_WIDTH-1:0] parallel_out;

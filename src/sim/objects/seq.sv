@@ -22,8 +22,8 @@ class seq extends uvm_sequence#(seq_item);
             assert(item.randomize()) else 
                 `uvm_fatal(get_type_name(), "Failed to randomize sequence item.")
 
-            `uvm_info(get_type_name(), $sformatf("Sending sequence item %0d: serial_in=%0b, we=%0b, out_dir=%0b, shift_dir=%0b", 
-                    i, item.serial_in, item.we,item.out_dir,item.shift_dir), UVM_LOW)
+            `uvm_info(get_type_name(), $sformatf("Sending sequence item %0d: serial_in=%0b, load=%0b, out_dir=%0b, shift_dir=%0b", 
+                    i, item.serial_in, item.load, item.out_dir,item.shift_dir), UVM_LOW)
 
             start_item(item);
             finish_item(item);
