@@ -35,7 +35,7 @@ module sipo_reg #(
     input logic clk,
     input logic arst_n,
     input logic serial_in,
-    input logic we,
+    input logic load,
     input logic out_dir, // 0: LSB first, 1: MSB first
     input logic shift_dir, // 0: Shift Right, 1: Shift Left
 
@@ -46,8 +46,8 @@ module sipo_reg #(
     // Shift left / shift right
     always_ff @(posedge clk or negedge arst_n) begin
         if (~arst_n) begin
-            shift_reg <= {DATA_WIDTH{1'b0}};
-        end else if (we) begin
+            shift_reg <= '0;
+        end else if (load) begin
             if (shift_dir) begin // Shift left
                 shift_reg <= {shift_reg[DATA_WIDTH-2:0], serial_in};
             end else begin // Shift right
@@ -59,8 +59,8 @@ module sipo_reg #(
     // Output normal or reverse order
     always_ff @(posedge clk or negedge arst_n) begin
         if (~arst_n) begin
-            parallel_out <= {DATA_WIDTH{1'b0}};
-        end else if (~we) begin
+            parallel_out <= '0;
+        end else if (~load) begin
             if (out_dir) begin // MSB to LSB (reverse order)
                 // Reverse the bits in shift_reg
                 parallel_out <= reverse_bits(shift_reg);
@@ -68,7 +68,7 @@ module sipo_reg #(
                 parallel_out <= shift_reg;
             end
         end else begin
-            parallel_out <= {DATA_WIDTH{1'b0}};
+            parallel_out <= '0;
         end
     end
 

@@ -18,8 +18,6 @@ class scb extends uvm_component;
         super.new(name, parent);
         imp = new("imp", this);
 
-        golden_shift_reg = '0;
-        output_expected = '0;
         pass_count = 0;
         fail_count = 0;
     endfunction
@@ -33,7 +31,7 @@ class scb extends uvm_component;
     function void write(rsp_item t);
 
         // Shift the golden model according to DUT behavior
-        if(t.we) begin
+        if(t.load) begin
              // When we is high, output_expected is zero
             if(t.shift_dir) begin
                 golden_shift_reg = {golden_shift_reg[DATA_WIDTH-2:0], t.serial_in};
@@ -50,13 +48,13 @@ class scb extends uvm_component;
         // Compare DUT output with golden model
         if(t.parallel_out !== output_expected) begin
             `uvm_error(get_type_name(), 
-                $sformatf("Mismatch detected! DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, we=%0b, out_dir=%0b, shift_dir=%0b",
-                        t.parallel_out, output_expected, t.serial_in, t.we, t.out_dir, t.shift_dir))
+                $sformatf("Mismatch detected! DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, load=%0b, out_dir=%0b, shift_dir=%0b",
+                        t.parallel_out, output_expected, t.serial_in, t.load, t.out_dir, t.shift_dir))
             fail_count++;
         end else begin
             `uvm_info(get_type_name(), 
-                $sformatf("Match: DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, we=%0b, out_dir=%0b, shift_dir=%0b", 
-                    t.parallel_out, output_expected, t.serial_in, t.we, t.out_dir, t.shift_dir), UVM_LOW)
+                $sformatf("Match: DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, load=%0b, out_dir=%0b, shift_dir=%0b", 
+                    t.parallel_out, output_expected, t.serial_in, t.load, t.out_dir, t.shift_dir), UVM_LOW)
             pass_count++;
         end
 

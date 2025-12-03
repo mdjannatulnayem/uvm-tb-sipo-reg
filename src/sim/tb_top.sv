@@ -14,7 +14,7 @@ module tb_top;
     logic clk;
     logic arst_n;
     logic serial_in;
-    logic we;
+    logic load;
     logic out_dir;
     logic shift_dir;
     logic [DATA_WIDTH-1:0] parallel_out;   
@@ -28,7 +28,7 @@ module tb_top;
         .clk(clk),
         .arst_n(arst_n),
         .serial_in(serial_in),
-        .we(we),
+        .load(load),
         .out_dir(out_dir),
         .shift_dir(shift_dir),
         .parallel_out(parallel_out)
@@ -37,7 +37,7 @@ module tb_top;
     assign clk = ctrl_if.clk;
     assign arst_n = ctrl_if.arst_n;
     assign serial_in = data_if.serial_in;
-    assign we = data_if.we;
+    assign load = data_if.load;
     assign out_dir = data_if.out_dir;
     assign shift_dir = data_if.shift_dir;
     assign data_if.parallel_out = parallel_out;
