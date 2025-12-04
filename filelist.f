@@ -20,6 +20,7 @@ src/sim/tb_top.sv
 src/sim/objects/seq_item.sv
 src/sim/objects/rsp_item.sv
 src/sim/objects/seq.sv
+src/sim/objects/seq_fl.sv
 
 #------------------------------
 # Components

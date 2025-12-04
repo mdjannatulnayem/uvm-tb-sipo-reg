@@ -33,14 +33,15 @@ class monitor extends uvm_monitor;
                 item = rsp_item::type_id::create("item");
 
                 @(posedge data_if.clk);
-                if (data_if.arst_n == 1'b0) begin
-                    `uvm_info(get_type_name(), "In reset, waiting for reset de-assertion", UVM_MEDIUM)
-                    @(posedge data_if.arst_n);  // Wait for reset to end
-                end
+                // if (data_if.arst_n == 1'b0) begin
+                //     `uvm_info(get_type_name(), "In reset, waiting for reset de-assertion", UVM_MEDIUM)
+                //     @(posedge data_if.arst_n);  // Wait for reset to end
+                // end
 
                 item.serial_in    = data_if.serial_in;
                 item.load         = data_if.load;
                 item.out_dir      = data_if.out_dir;
+                item.arst_n       = data_if.arst_n;
                 item.parallel_out = data_if.parallel_out;
 
                 `uvm_info(get_type_name(), $sformatf("Monitoring signals: serial_in=%0b, load=%0b, out_dir=%0b, parallel_out=%0h",

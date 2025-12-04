@@ -29,10 +29,11 @@ class scb extends uvm_component;
 
     // Called when monitor writes a transaction
     function void write(rsp_item t);
-
         // Shift the golden model according to DUT behavior
-        if(t.load) begin
-             // When we is high, output_expected is zero            
+        if(~t.arst_n) begin
+            output_expected = '0;
+        end else if(t.load) begin
+            // When we is high, output_expected is zero            
             golden_shift_reg = {golden_shift_reg[DATA_WIDTH-2:0], t.serial_in};
             output_expected = '0;
         end else begin
