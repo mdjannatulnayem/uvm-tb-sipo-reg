@@ -32,14 +32,9 @@ class scb extends uvm_component;
 
         // Shift the golden model according to DUT behavior
         if(t.load) begin
-             // When we is high, output_expected is zero
-            if(t.shift_dir) begin
-                golden_shift_reg = {golden_shift_reg[DATA_WIDTH-2:0], t.serial_in};
-                output_expected = '0;
-            end else begin
-                golden_shift_reg = {t.serial_in, golden_shift_reg[DATA_WIDTH-1:1]};
-                output_expected = '0;
-            end
+             // When we is high, output_expected is zero            
+            golden_shift_reg = {golden_shift_reg[DATA_WIDTH-2:0], t.serial_in};
+            output_expected = '0;
         end else begin
             // When we is low, output_expected should match shift register
             output_expected =  t.out_dir ? reverse_bits(golden_shift_reg) : golden_shift_reg; 
@@ -48,13 +43,13 @@ class scb extends uvm_component;
         // Compare DUT output with golden model
         if(t.parallel_out !== output_expected) begin
             `uvm_error(get_type_name(), 
-                $sformatf("Mismatch detected! DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, load=%0b, out_dir=%0b, shift_dir=%0b",
-                        t.parallel_out, output_expected, t.serial_in, t.load, t.out_dir, t.shift_dir))
+                $sformatf("Mismatch detected! DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, load=%0b, out_dir=%0b",
+                        t.parallel_out, output_expected, t.serial_in, t.load, t.out_dir))
             fail_count++;
         end else begin
             `uvm_info(get_type_name(), 
-                $sformatf("Match: DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, load=%0b, out_dir=%0b, shift_dir=%0b", 
-                    t.parallel_out, output_expected, t.serial_in, t.load, t.out_dir, t.shift_dir), UVM_LOW)
+                $sformatf("Match: DUT=0x%0h, GOLD=0x%0h, serial_in=%0b, load=%0b, out_dir=%0b", 
+                    t.parallel_out, output_expected, t.serial_in, t.load, t.out_dir), UVM_LOW)
             pass_count++;
         end
 

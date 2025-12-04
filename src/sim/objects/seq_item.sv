@@ -3,7 +3,6 @@ class seq_item extends uvm_sequence_item;
     rand bit serial_in;
     rand bit load;
     rand bit out_dir;
-    rand bit shift_dir;
 
     `uvm_object_utils(seq_item)
 

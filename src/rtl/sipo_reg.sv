@@ -37,8 +37,6 @@ module sipo_reg #(
     input logic serial_in,
     input logic load,
     input logic out_dir, // 0: LSB first, 1: MSB first
-    input logic shift_dir, // 0: Shift Right, 1: Shift Left
-
     output logic [DATA_WIDTH-1:0] parallel_out
 );
     logic [DATA_WIDTH-1:0] shift_reg;
@@ -48,11 +46,7 @@ module sipo_reg #(
         if (~arst_n) begin
             shift_reg <= '0;
         end else if (load) begin
-            if (shift_dir) begin // Shift left
-                shift_reg <= {shift_reg[DATA_WIDTH-2:0], serial_in};
-            end else begin // Shift right
-                shift_reg <= {serial_in, shift_reg[DATA_WIDTH-1:1]};
-            end
+            shift_reg <= {shift_reg[DATA_WIDTH-2:0], serial_in};
         end
     end
     

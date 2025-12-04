@@ -4,19 +4,16 @@ import uvm_pkg::*;
 
 module tb_top;
 
-    initial $display("##--------------TEST STARTED-------------_##");
+    initial $display("##--------------TEST STARTED--------------##");
     final $display("##--------------TEST ENDED--------------##");
 
     localparam int DATA_WIDTH = 32;
-    localparam int SEQ_LENGTH = 32;
-    localparam int SHIFT_LEFT = 1;
 
     logic clk;
     logic arst_n;
     logic serial_in;
     logic load;
     logic out_dir;
-    logic shift_dir;
     logic [DATA_WIDTH-1:0] parallel_out;   
 
     ctrl_intf ctrl_if();
@@ -30,7 +27,6 @@ module tb_top;
         .serial_in(serial_in),
         .load(load),
         .out_dir(out_dir),
-        .shift_dir(shift_dir),
         .parallel_out(parallel_out)
     );
 
@@ -39,7 +35,6 @@ module tb_top;
     assign serial_in = data_if.serial_in;
     assign load = data_if.load;
     assign out_dir = data_if.out_dir;
-    assign shift_dir = data_if.shift_dir;
     assign data_if.parallel_out = parallel_out;
 
     initial begin

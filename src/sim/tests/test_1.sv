@@ -5,12 +5,12 @@ class test_1 extends base_test;
 
     function new(string name = "test_1", uvm_component parent = null);
         super.new(name, parent);
+
+        uvm_config_db#(int unsigned)::set(uvm_root::get(), "seq_length", "int", seq_length);
     endfunction
 
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-
-        uvm_config_db#(int unsigned)::set(uvm_root::get(), "seq_length", "int", seq_length);
     endfunction
 
     task run_phase(uvm_phase phase);
