@@ -19,7 +19,7 @@ class env extends uvm_env;
 
     function void connect_phase(uvm_phase phase);
         // No virtual sequencer
-        agt.mon.ap.connect(scbd.ap);
+        agt.mon.ap.connect(scbd.imp);
     endfunction
 
 endclass : env

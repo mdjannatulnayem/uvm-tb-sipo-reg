@@ -4,37 +4,37 @@ import uvm_pkg::*;
 
 module tb_top;
 
-    initial $display("##--------------TEST STARTED-------------_##");
+    initial $display("##--------------TEST STARTED--------------##");
     final $display("##--------------TEST ENDED--------------##");
 
     localparam int DATA_WIDTH = 32;
-    localparam int SEQ_LENGTH = 32;
-    localparam int SHIFT_LEFT = 1;
 
     logic clk;
     logic arst_n;
     logic serial_in;
-    logic we;
+    logic load;
+    logic out_dir;
     logic [DATA_WIDTH-1:0] parallel_out;   
 
     ctrl_intf ctrl_if();
     data_intf #(DATA_WIDTH) data_if(.clk(clk), .arst_n(arst_n));
 
     sipo_reg #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .SHIFT_LEFT(SHIFT_LEFT)
+        .DATA_WIDTH(DATA_WIDTH)
     ) dut (
         .clk(clk),
         .arst_n(arst_n),
         .serial_in(serial_in),
-        .we(we),
+        .load(load),
+        .out_dir(out_dir),
         .parallel_out(parallel_out)
     );
 
     assign clk = ctrl_if.clk;
     assign arst_n = ctrl_if.arst_n;
     assign serial_in = data_if.serial_in;
-    assign we = data_if.we;
+    assign load = data_if.load;
+    assign out_dir = data_if.out_dir;
     assign data_if.parallel_out = parallel_out;
 
     initial begin

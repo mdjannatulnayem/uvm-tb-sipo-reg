@@ -1,7 +1,9 @@
 class seq_item extends uvm_sequence_item;
 
+    logic arst_n;
     rand bit serial_in;
-    rand bit we;
+    rand bit load;
+    rand bit out_dir;
 
     `uvm_object_utils(seq_item)
 
