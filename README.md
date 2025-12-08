@@ -1,7 +1,3 @@
-# UVM Testbench for SIPO Register
-
-## Overview
-
 This repository contains a UVM-based (Universal Verification Methodology) testbench for verifying a **Serial-In-Parallel-Out (SIPO) Register** design. The testbench is structured to facilitate easy integration of UVM components and provide an efficient simulation flow using **Xilinx Vivado** tools (with `xvlog`, `xelab`, and `xsim`).
 
 ## Features
@@ -127,5 +123,7 @@ For any questions or feedback, please contact the repository maintainer:
 
 * Name: Md. Jannatul Nayem
 * Email: nayemalimran106@gmail.com
-* GitHub: mdjannatulnayem
+
+
+
 
